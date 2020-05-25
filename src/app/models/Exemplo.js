@@ -11,7 +11,6 @@ class Exemplo extends Model {
 		
 		return this;
 	}
-
 }
 
 export default Exemplo;

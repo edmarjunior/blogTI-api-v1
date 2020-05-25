@@ -2,8 +2,10 @@ import Sequelize from 'sequelize';
 import databaseConfig from '../config/database';
 
 import Exemplo from '../app/models/Exemplo';
+import Conteudo from '../app/models/Conteudo';
+import AcessoConteudo from '../app/models/AcessoConteudo';
 
-const models = [Exemplo];
+const models = [Exemplo, Conteudo, AcessoConteudo];
 
 class Database {
 	constructor() {

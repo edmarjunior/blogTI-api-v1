@@ -1,6 +1,7 @@
 import { Router } from 'express';
 
 import ExemploController from './app/controllers/ExemploController';
+import ConteudoController from './app/controllers/ConteudoController';
 
 const routes = new Router();
 
@@ -16,5 +17,9 @@ routes.get('/exemplos/:id', ExemploController.show);
 routes.post('/exemplos', ExemploController.store);
 routes.put('/exemplos/:id', ExemploController.update);
 routes.delete('/exemplos/:id', ExemploController.delete);
+
+// conteúdos
+routes.get('/conteudos/', ConteudoController.index);
+routes.get('/conteudos/:id', ConteudoController.show);
 
 export default routes;
