@@ -36,7 +36,9 @@ class ConteudoController {
             data: new Date(),
         });
 
-        return res.json(conteudo);
+        const quantidade_acessos = await AcessoConteudo.count({ where: { conteudo_id: id }});
+
+        return res.json({...conteudo.dataValues, quantidade_acessos});
     }
 }
 
