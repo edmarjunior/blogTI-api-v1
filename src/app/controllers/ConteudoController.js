@@ -19,10 +19,12 @@ class ConteudoController {
             return res.status(401).json({ message: 'Conteúdo não encontrado' });
         }
 
+        const quantidade_acessos = await AcessoConteudo.count({ where: { conteudo_id: id }});
+
         const { ip } = req.headers;
 
-        if (!ip) {
-            return res.json(conteudo);
+        if (!ip || ip === '179.126.47.176' || ip === '189.112.203.1') {
+            return res.json({...conteudo.dataValues, quantidade_acessos});
         }
 
         const response = await axios.get(`http://ip-api.com/json/${ip}`)
@@ -36,9 +38,8 @@ class ConteudoController {
             data: new Date(),
         });
 
-        const quantidade_acessos = await AcessoConteudo.count({ where: { conteudo_id: id }});
 
-        return res.json({...conteudo.dataValues, quantidade_acessos});
+        return res.json({...conteudo.dataValues, quantidade_acessos: quantidade_acessos + 1});
     }
 }
 
