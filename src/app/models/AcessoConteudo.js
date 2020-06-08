@@ -6,7 +6,8 @@ class AcessoConteudo extends Model {
 			{
                 conteudo_id: Sequelize.INTEGER,
                 localizacao: Sequelize.STRING,
-                data: Sequelize.DATE,
+				data: Sequelize.DATE,
+                ip: Sequelize.STRING,
 			},
 			{ sequelize }
 		);

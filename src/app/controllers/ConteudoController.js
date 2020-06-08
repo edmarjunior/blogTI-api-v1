@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { addHours } from 'date-fns';
+
 import Conteudo from "../models/Conteudo";
 import AcessoConteudo from "../models/AcessoConteudo";
 
@@ -9,13 +11,11 @@ class ConteudoController {
     }
 
     async show(req, res) {
-        
         const { id } = req.params;
 
         const conteudo = await Conteudo.findByPk(id);
 
-        if (conteudo == null)
-        {
+        if (conteudo == null) {
             return res.status(401).json({ message: 'Conteúdo não encontrado' });
         }
 
@@ -27,6 +27,21 @@ class ConteudoController {
             return res.json({...conteudo.dataValues, quantidade_acessos});
         }
 
+        const ultimoAcesso = await AcessoConteudo.findOne({ 
+            where: { ip }, 
+            order: [
+                ['data', 'DESC']
+            ]
+        });
+
+        if (ultimoAcesso?.data) {
+            const dataValidaNovoAcesso = addHours(ultimoAcesso.data, 1);
+
+            if (new Date() < dataValidaNovoAcesso) {
+                return res.json({...conteudo.dataValues, quantidade_acessos});
+            }
+        }
+
         const response = await axios.get(`http://ip-api.com/json/${ip}`)
 
         const { countryCode, region, city, lat, lon } = response.data;
@@ -34,10 +49,10 @@ class ConteudoController {
         // gravando acesso
         await AcessoConteudo.create({
             conteudo_id: id,
-            localizacao: JSON.stringify({ ip, countryCode, region, city, lat, lon }),
+            localizacao: JSON.stringify({ countryCode, region, city, lat, lon }),
             data: new Date(),
+            ip,
         });
-
 
         return res.json({...conteudo.dataValues, quantidade_acessos: quantidade_acessos + 1});
     }
