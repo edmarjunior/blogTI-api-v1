@@ -20,6 +20,11 @@ class AcessoConteudo extends Model {
 			foreignKey: 'conteudo_id',
 			as: 'conteudo',
 		});
+
+		this.belongsTo(models.Usuario, {
+			foreignKey: 'usuario_id',
+			as: 'usuario',
+		});
 	}
 }
 

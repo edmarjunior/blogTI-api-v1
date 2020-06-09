@@ -1,25 +1,28 @@
 import { Router } from 'express';
 
-import ExemploController from './app/controllers/ExemploController';
+import authMiddleware from "./app/middlewares/auth";
+
 import ConteudoController from './app/controllers/ConteudoController';
+import UsuarioController from './app/controllers/UsuarioController';
+import CurtidaConteudoController from './app/controllers/CurtidaConteudoController';
 
 const routes = new Router();
 
 routes.get('/ping', (req, res) =>
-	res.json({
-		status_api: 'Ok',
-		current_date: `${new Date().toLocaleDateString()} às ${new Date().toLocaleTimeString()}`,
-	})
+	res.json({ status: 'Ok', hour: new Date().toLocaleTimeString(), })
 );
-
-routes.get('/exemplos', ExemploController.index);
-routes.get('/exemplos/:id', ExemploController.show);
-routes.post('/exemplos', ExemploController.store);
-routes.put('/exemplos/:id', ExemploController.update);
-routes.delete('/exemplos/:id', ExemploController.delete);
 
 // conteúdos
 routes.get('/conteudos/', ConteudoController.index);
 routes.get('/conteudos/:id', ConteudoController.show);
+
+// usuarios
+routes.post('/usuarios', UsuarioController.store)
+
+/** AUTENTICAÇÃO */
+routes.use(authMiddleware);
+
+// curtidas
+routes.post('/curtida-conteudo/:idConteudo', CurtidaConteudoController.store)
 
 export default routes;

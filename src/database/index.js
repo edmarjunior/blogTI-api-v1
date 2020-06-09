@@ -4,8 +4,10 @@ import databaseConfig from '../config/database';
 import Exemplo from '../app/models/Exemplo';
 import Conteudo from '../app/models/Conteudo';
 import AcessoConteudo from '../app/models/AcessoConteudo';
+import Usuario from '../app/models/Usuario';
+import CurtidaConteudo from '../app/models/CurtidaConteudo';
 
-const models = [Exemplo, Conteudo, AcessoConteudo];
+const models = [Exemplo, Conteudo, AcessoConteudo, Usuario, CurtidaConteudo];
 
 class Database {
 	constructor() {
