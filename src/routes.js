@@ -17,12 +17,12 @@ routes.get('/conteudos/', ConteudoController.index);
 routes.get('/conteudos/:id', ConteudoController.show);
 
 // usuarios
-routes.post('/usuarios', UsuarioController.store)
+routes.post('/usuarios', UsuarioController.store);
 
 /** AUTENTICAÇÃO */
 routes.use(authMiddleware);
 
 // curtidas
-routes.post('/curtida-conteudo/:idConteudo', CurtidaConteudoController.store)
+routes.post('/curtida-conteudo/:idConteudo', CurtidaConteudoController.store);
 
 export default routes;

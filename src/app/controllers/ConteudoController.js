@@ -22,6 +22,10 @@ class ConteudoController {
 
         conteudo = conteudo.dataValues;
 
+        conteudo.quantidade_curtidas = await CurtidaConteudo.count({
+            where: { conteudo_id: id }
+        });
+
         const { idUsuario } = req.query;
 
         if (!idUsuario) {
