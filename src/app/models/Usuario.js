@@ -9,6 +9,7 @@ class Usuario extends Model {
                 email: Sequelize.STRING,
                 nome: Sequelize.STRING,
                 data_cadastro: Sequelize.DATE,
+                avatar_url: Sequelize.STRING,
             },
             { sequelize }
         );
