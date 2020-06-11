@@ -13,7 +13,11 @@ class CurtidaConteudoController {
         });
 
         if (curtidaAnterior) {
-            return res.status(400).json({ error: 'Este conteúdo já foi curtido'});
+            return res.json({ 
+                ...curtidaAnterior.dataValues,
+                curtido_anteriormente: true,  
+                msg: 'Este conteúdo já estava curtido, obrigado!'
+            });
         }
 
         const curtida = await CurtidaConteudo.create({
