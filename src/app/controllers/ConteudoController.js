@@ -4,6 +4,7 @@ import { addHours } from 'date-fns';
 import Conteudo from "../models/Conteudo";
 import AcessoConteudo from "../models/AcessoConteudo";
 import CurtidaConteudo from "../models/CurtidaConteudo";
+import Usuario from "../models/Usuario";
 
 class ConteudoController {
     async index(req, res) {
@@ -28,7 +29,11 @@ class ConteudoController {
 
         const { idUsuario } = req.query;
 
-        if (!idUsuario) {
+        const possuiUsuario = !!idUsuario && await Usuario.findByPk(idUsuario);
+
+
+
+        if (!possuiUsuario) {
             conteudo.isCurtido = false;
         } else {
             const curtida = await CurtidaConteudo.findOne({ 
@@ -74,7 +79,7 @@ class ConteudoController {
             localizacao: JSON.stringify({ countryCode, region, city, lat, lon }),
             data: new Date(),
             ip,
-            usuario_id: idUsuario
+            usuario_id: possuiUsuario ? idUsuario : null
         });
 
         conteudo.quantidade_acessos++;
