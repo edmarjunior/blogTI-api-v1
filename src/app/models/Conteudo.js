@@ -7,6 +7,7 @@ class Conteudo extends Model {
                 assunto: Sequelize.STRING,
                 titulo: Sequelize.STRING,
                 data_publicacao: Sequelize.DATE,
+                resumo: Sequelize.STRING,
             },
             { sequelize }
         );
