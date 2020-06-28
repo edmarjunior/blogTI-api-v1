@@ -1,4 +1,3 @@
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
       return queryInterface.addColumn('conteudos', 'resumo', { 
@@ -6,7 +5,7 @@ module.exports = {
       });
   },
 
-  down: (queryInterface, Sequelize) => {
+  down: queryInterface => {
       return queryInterface.removeColumn('conteudos', 'resumo');
   }
 };

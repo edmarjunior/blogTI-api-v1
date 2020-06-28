@@ -11,7 +11,7 @@ class CurtidaConteudo extends Model {
 
         this.addHook('beforeSave', async usuario => {
             usuario.data_cadastro = new Date();
-        })
+        });
 
         return this;
     }

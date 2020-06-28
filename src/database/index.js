@@ -6,8 +6,9 @@ import Conteudo from '../app/models/Conteudo';
 import AcessoConteudo from '../app/models/AcessoConteudo';
 import Usuario from '../app/models/Usuario';
 import CurtidaConteudo from '../app/models/CurtidaConteudo';
+import ComentarioConteudo from '../app/models/ComentarioConteudo';
 
-const models = [Exemplo, Conteudo, AcessoConteudo, Usuario, CurtidaConteudo];
+const models = [Exemplo, Conteudo, AcessoConteudo, Usuario, CurtidaConteudo, ComentarioConteudo];
 
 class Database {
 	constructor() {
