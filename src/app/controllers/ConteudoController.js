@@ -50,7 +50,7 @@ class ConteudoController {
 
         const { ip } = req.headers;
 
-        if (!ip || ip === '179.126.47.176' || ip === '189.112.203.1') {
+        if (!ip || ip === '189.41.145.160' || ip === '177.11.188.2') {
             return res.json(conteudo);
         }
 
